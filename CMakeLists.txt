@@ -98,11 +98,11 @@ endif()
 if(MSVC OR MSVC_IDE)
 	if( MSVC_VERSION LESS 1700 )       # VC10- / VS2010-
 		message(FATAL_ERROR "The project requires C++11 features. "
-		"You need at least Visual Studio 11 (Microsoft Visual Studio 2012), "
-		"with Microsoft Visual C++ Compiler Nov 2012 CTP (v120_CTP_Nov2012).")
+			"You need at least Visual Studio 11 (Microsoft Visual Studio 2012), "
+			"with Microsoft Visual C++ Compiler Nov 2012 CTP (v120_CTP_Nov2012).")
 	elseif( MSVC_VERSION EQUAL 1700 )  # VC11 / VS2012
 		message( "VC11: using Microsoft Visual Studio 2012 "
-		"with Microsoft Visual C++ Compiler Nov 2012 CTP (v120_CTP_Nov2012)" )
+			"with Microsoft Visual C++ Compiler Nov 2012 CTP (v120_CTP_Nov2012)" )
 		set(CMAKE_GENERATOR_TOOLSET "v120_CTP_Nov2012" CACHE STRING "Platform Toolset" FORCE)
 	else() # VC12+, assuming C++11 supported.
 	endif()
@@ -140,7 +140,6 @@ if(${BUILD_UNSTABLE_TOOLS})
 	add_subdirectory(Tools/GeneratorPerformanceTest/)
 endif()
 
-include(CheckCXXCompilerFlag)
 include(SetFlags.cmake)
 set_flags()
 set_lib_flags()
@@ -150,7 +149,6 @@ enable_profile()
 if (WIN32)
 	add_definitions(-DLUA_BUILD_AS_DLL)
 endif()
-
 
 # The Expat library is linked in statically, make the source files aware of that:
 add_definitions(-DXML_STATIC)
@@ -166,7 +164,7 @@ endif()
 # Build all dependent libraries as static:
 SET(CMAKE_BUILD_STATIC_LIBRARIES ON)
 
-
+####
 
 
 
@@ -262,7 +260,6 @@ set_property(TARGET jsoncpp_lib_static PROPERTY PROJECT_LABEL "jsoncpp")
 if (WIN32)
 	add_subdirectory(lib/luaproxy/)
 endif()
-
 
 # We use EXCLUDE_FROM_ALL so that only the explicit dependencies are used
 # (PolarSSL also has test and example programs in their CMakeLists.txt, we don't want those)
