@@ -272,7 +272,7 @@ void cRoot::Start(std::unique_ptr<cSettingsRepositoryInterface> a_OverridesRepo)
 	delete m_Server; m_Server = nullptr;
 
 	m_InputThreadRunFlag.clear();
-	#ifdef _WIN32
+	#if defined(_WIN32)
 		DWORD Length;
 		INPUT_RECORD Record
 		{
@@ -302,7 +302,7 @@ void cRoot::Start(std::unique_ptr<cSettingsRepositoryInterface> a_OverridesRepo)
 		{
 			m_InputThread.join();
 		}
-	#else
+	#elif !defined(ANDROID)
 		if (pthread_kill(m_InputThread.native_handle(), SIGKILL) != 0)
 		{
 			LOGWARN("Couldn't notify the input thread; the server will hang before shutdown!");
