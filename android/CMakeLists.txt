@@ -1,5 +1,6 @@
 # Build command:
-# cmake . -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=16 -DCMAKE_BUILD_TYPE=Release -DCMAKE_ANDROID_ARCH_ABI=armeabi -G "MinGW Makefiles" -DCMAKE_MAKE_PROGRAM="" -DNATIVE_TOLUA_GENERATOR="" -DCMAKE_ANDROID_NDK=""
+# cmake . -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=16 -DCMAKE_BUILD_TYPE=Release -DCMAKE_ANDROID_ARCH_ABI=armeabi -DNATIVE_TOLUA_GENERATOR="" -DCMAKE_ANDROID_NDK=""
+# -G "MinGW Makefiles" -DCMAKE_MAKE_PROGRAM="" may also be required on Windows
 
 cmake_minimum_required (VERSION 3.7)
 project(Cuberite)
@@ -8,12 +9,8 @@ include(ExternalProject)
 # Set up Android parameters
 add_definitions(-DANDROID)
 set(ANDROID TRUE)
-# set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/libs/${CMAKE_ANDROID_ARCH_ABI}")
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fPIE -pie")
-
-# Tell Lua to not use unimplemented Android locale features
-add_definitions(-Dgetlocaledecpoint\(\)="'.'")
 
 # We're crosscompiling for Android
 set(NO_NATIVE_OPTIMIZATION TRUE)
